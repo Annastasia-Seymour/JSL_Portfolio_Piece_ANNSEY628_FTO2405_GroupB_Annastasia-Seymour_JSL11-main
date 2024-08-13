@@ -1,7 +1,7 @@
 // TASK: import helper functions from utils
 // TASK: import initialData
-
-
+import { getTasks , createNewTask, patchTask , putTask , deleteTask } from './utils/taskFunctions.js';
+import initialData from './initialData.js';
 /*************************************************************************************************************************************************
  * FIX BUGS!!!
  * **********************************************************************************************************************************************/
@@ -15,13 +15,18 @@ function initializeData() {
     console.log('Data already exists in localStorage');
   }
 }
-
+initializeData();
 // TASK: Get elements from the DOM
 const elements = {
+  taskList: document.getElementById (''),
+  newTask : document.getElementById('new-task-modal-window'),
+  updateTask: document.getElementById(''),
+
+
 
 }
 
-let activeBoard = ""
+let activeBoard = "";
 
 // Extracts unique board names from tasks
 // TASK: FIX BUGS
@@ -31,7 +36,7 @@ function fetchAndDisplayBoardsAndTasks() {
   displayBoards(boards);
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
-    activeBoard = localStorageBoard ? localStorageBoard ;  boards[0]; 
+    activeBoard = localStorageBoard ? localStorageBoard : boards[0]; 
     elements.headerBoardName.textContent = activeBoard
     styleActiveBoard(activeBoard)
     refreshTasksUI();
@@ -47,13 +52,13 @@ function displayBoards(boards) {
     const boardElement = document.createElement("button");
     boardElement.textContent = board;
     boardElement.classList.add("board-btn");
-    boardElement.click()  { 
+    boardElement.addEventListener('click', function() {
       elements.headerBoardName.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board //assigns active board
       localStorage.setItem("activeBoard", JSON.stringify(activeBoard))
       styleActiveBoard(activeBoard)
-    };
+    });
     boardsContainer.appendChild(boardElement);
   });
 
@@ -83,7 +88,7 @@ function filterAndDisplayTasksByBoard(boardName) {
       taskElement.classList.add("task-div");
       taskElement.textContent = task.title;
       taskElement.setAttribute('data-task-id', task.id);
-
+    
       // Listen for a click event on each task and open a modal
       taskElement.click() => { 
         openEditTaskModal(task);
@@ -92,7 +97,7 @@ function filterAndDisplayTasksByBoard(boardName) {
       tasksContainer.appendChild(taskElement);
     });
   });
-}
+
 
 
 function refreshTasksUI() {
