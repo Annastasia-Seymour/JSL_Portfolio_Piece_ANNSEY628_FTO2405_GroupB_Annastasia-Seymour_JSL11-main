@@ -19,7 +19,7 @@ initializeData();
 // TASK: Get elements from the DOM
 const elements = {
   // Get the task list container or any other container where tasks are displayed
-  taskList: document.querySelector('.card-column-main'), // Assuming this is where tasks are listed
+  taskList: document.querySelector('#add-new-task-btn'), // Assuming this is where tasks are listed
 
   // New Task Modal
   newTask: document.getElementById('new-task-modal-window'),
@@ -235,6 +235,7 @@ function addTask(event) {
 
 function toggleSidebar(show) {
  sideBar = document.getElementById("side-bar-div");
+ const mainContent = document.querySelector(".card-column-main");
 }
 
 function toggleTheme() {
