@@ -234,11 +234,11 @@ function addTask(event) {
 
 
 function toggleSidebar(show) {
- 
+ sideBar = document.getElementById("side-bar-div");
 }
 
 function toggleTheme() {
- 
+  themeSwitch.classList.toggle("light-theme");
 }
 
 
