@@ -259,9 +259,13 @@ console.log(newTaskData);
 function toggleSidebar(show) {
   const sidebar = elements.sideBar; // kinda redundant because i add it to the top line 28, but makes it easier to reference variables in the functions relevant
   if (show) {
-    sidebar.style.display = 'block'; // or add a class to show the sidebar
+    sidebar.style.display = 'block';
+    elements.showSideBarBtn.style.display ='none'; 
+    // or add a class to show the sidebar
+    
   } else {
     sidebar.style.display = 'none'; // or add a class to hide the sidebar
+    elements.showSideBarBtn.style.display ='flex';
   }
 }
 
@@ -270,7 +274,9 @@ function toggleSidebar(show) {
 function toggleTheme() {
   const body = document.body;
   const logo = document.getElementById("logo"); // Ensure this ID matches your HTML
- const svgLight = `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+  // Define your SVGs for light and dark themes
+  const svgLight = `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="478" height="81" viewBox="0 0 478 81" xml:space="preserve">
 <desc>Created with Fabric.js 5.2.4</desc>
@@ -282,10 +288,11 @@ function toggleTheme() {
 <rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-239" y="-40.5" rx="0" ry="0" width="478" height="81" />
 </g>
 <g transform="matrix(0.09 0 0 0.09 0 40.5)" style="" id="b86d6ad2-4d31-4d60-a2b7-633de9bb16e6">
-    <text xml:space="preserve" font-family="Raleway" font-size="650" font-style="normal" font-weight="900" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="0" y="80" >AGILE BOARD✨</tspan></text>
+    <text xml:space="preserve" font-family="Raleway" font-size="650" font-style="normal" font-weight="900" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="0" y="80" >AGILE BOARD✨</tspan></text>
 </g>
 </svg>`;
-const svgDark = `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+  
+  const svgDark = `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="478" height="81" viewBox="0 0 478 81" xml:space="preserve">
 <desc>Created with Fabric.js 5.2.4</desc>
@@ -301,21 +308,14 @@ const svgDark = `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 </g>
 </svg>`;
 
-  // Toggle theme
-  
+  // Toggle theme and update the logo
   const isLightTheme = body.classList.toggle('light-theme');
-  logo.innerHTML = isLightTheme ? svgDark : svgLight; 
-  // Update the logo based on the current theme
-  if (isLightTheme) {
-    logo.innerHTML = svgLight;
-  } else {
-    logo.innerHTML = svgDark;
-  }
+  logo.innerHTML = isLightTheme ? svgLight : svgDark// Swap SVGs for the theme
 
   // Save the theme preference
-  localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
-
-}// theme switch works well
+  localStorage.setItem('theme', isLightTheme ? 'dark' : 'light');
+}
+// theme switch works well
 //i need to swop logo based on themes
 //WOOHOOO ITS WORKS IM SUCH A GENIUS!!!!!!
 //no actually its dumb!!!!
