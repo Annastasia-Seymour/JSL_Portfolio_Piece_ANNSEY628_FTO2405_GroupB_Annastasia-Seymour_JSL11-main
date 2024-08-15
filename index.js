@@ -269,7 +269,7 @@ function toggleTheme() {
   const body = document.body;
   body.classList.toggle('light-theme');
   localStorage.setItem('light-theme', body.classList.contains('light-theme') ? 'disabled' : 'enabled');
-}
+}// theme switch works well
 
 
 function openEditTaskModal(task) {

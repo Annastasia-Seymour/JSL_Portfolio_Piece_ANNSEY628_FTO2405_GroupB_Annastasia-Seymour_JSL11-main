@@ -181,7 +181,7 @@ h4 {
 }
 
 .hide-side-bar-div {
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: flex-start;
   margin-left: 50px;
@@ -347,7 +347,8 @@ header {
 
 #edit-task-header {
   display: flex;
-  flex-direction: row;
+
+  flex-direction: column;
 }
 
 .task-title {
