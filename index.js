@@ -199,14 +199,14 @@ function setupEventListeners() {
  const newTaskModal = elements.newTask;
 
   // Add new task form submission event listener
-  elements.newTask.modalWindow.addEventListener('submit',  (event) => {
+  elements.newTask.addEventListener('submit',  (event) => {
     addTask(event)
   });
 }
 
 // Toggles tasks modal
 // Task: Fix bugs
-function toggleModal(show, modal = elements.modalWindow) {
+function toggleModal(show, modal = elements.newTask) {
   modal.style.display = show ? 'block' : 'none'; 
 }
 
