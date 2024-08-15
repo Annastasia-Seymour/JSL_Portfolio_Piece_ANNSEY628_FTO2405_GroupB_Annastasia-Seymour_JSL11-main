@@ -81,6 +81,10 @@ body {
   height: 200px;
   margin-top: 50px;
 }
+/*#boards-nav-links-div {
+  display: none;
+}*/
+
 
 #create-board-btn {
   /* order: -3; */
@@ -578,9 +582,10 @@ h2 {
   letter-spacing: 1px;
 }
 
+
 .modal-window {
   /* border: 5px solid red; */
-  display: flex;
+  display: none;
   flex-direction: column;
   position: fixed;
   top: 50%;
