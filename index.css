@@ -20,8 +20,17 @@
   --primary-font-color: #000000;
   --secondary-font-color: #828fa3;
   --primary-box-shadow: 0px 8px 18px 0px rgba(176, 176, 188, 0.56);
-  border: 5px solid red;
+  /*border: 5px solid red;*/
 }
+
+/* .light-theme, img#logo{
+  --primary-color: #ffffff;
+  --secondary-color: #a04646;
+  --primary-font-color: #000000;
+  --secondary-font-color: #828fa3;
+  --primary-box-shadow: 0px 8px 18px 0px rgba(176, 176, 188, 0.56);
+} 
+  /*border: 5px solid red;*/
 
 body {
   font-family: 'IBM Plex Sans', sans-serif;

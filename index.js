@@ -242,13 +242,13 @@ console.log(newTaskData);
     addTaskToUI(newTask);
     toggleModal(false);
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-    event.target.reset(); // Ensure this targets the correct form
+    event.target.reset(); // Ensure this targets the correct form this was low key confusing
     refreshTasksUI();
   }
 }
 
 function toggleSidebar(show) {
-  const sidebar = elements.sideBar; // Ensure this matches your sidebar's ID
+  const sidebar = elements.sideBar; // kinda redundant because i add it to the top line 28, but makes it easier to reference variables in the functions relevant
   if (show) {
     sidebar.style.display = 'block'; // or add a class to show the sidebar
   } else {
@@ -258,8 +258,8 @@ function toggleSidebar(show) {
 
 function toggleTheme() {
   const body = document.body;
-  
- 
+  body.classList.toggle('light-theme');
+  localStorage.setItem('light-theme', body.classList.contains('light-theme') ? 'disabled' : 'enabled');
 }
 
 
