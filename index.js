@@ -121,9 +121,23 @@ function filterAndDisplayTasksByBoard(boardName) {
 }
 
 function refreshTasksUI() {
-  //filterAndDisplayTasksByBoard(activeBoard);
+  const tasks = getTasks();
+  //call the function! ill send the function to the refreshTasksUI()
+  const filteredTasks = tasks.filter (task => task.board === activeBoard);
 
+   // Clear the UI before adding tasks
+   const taskContainer = document.querySelector(".tasks-container");
+   taskContainer.innerHTML = '';
   
+   filteredTasks.forEach(task => {
+    const taskElement = document.createElement('div');
+    taskElement.textContent = `${task.title}: ${task.description}`;
+    // Add more task details and styles as needed
+    taskContainer.appendChild(taskElement);
+  });
+
+  filterAndDisplayTasksByBoard(activeBoard);
+ 
 }
 
 
@@ -259,16 +273,19 @@ console.log(newTaskData);
   const newTask = createNewTask(newTaskData);
   if (newTask) {
 
-    const tasks = getTasks();
-    //call the function! ill send the function to the refreshTasksUI()
-     
+    const tasks = putTask();
+     //call the function! ill send the function to the refreshTasksUI()
      tasks.push(newTask);
      //sends the task to the local storage
      localStorage.setItem('tasks', JSON.stringify(tasks));
 
+     
     addTaskToUI(newTask);
     toggleModal(false);
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
+    // const boardElement = document.createElement("button");
+    // boardElement.textContent = board;
+    // function displayBoards(boards) 
     event.target.reset(); // Ensure this targets the correct form ,this was low key confusing
     refreshTasksUI();
   }else {
