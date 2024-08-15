@@ -195,9 +195,11 @@ function setupEventListeners() {
     toggleModal(true);
     elements.filterDiv.style.display = 'block'; // Also show the filter overlay
   });
+  
+ const newTaskModal = elements.newTask;
 
   // Add new task form submission event listener
-  elements.modalWindow.addEventListener('submit',  (event) => {
+  elements.newTask.modalWindow.addEventListener('submit',  (event) => {
     addTask(event)
   });
 }
