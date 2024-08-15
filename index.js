@@ -35,7 +35,8 @@ const elements = {
   // Filter overlay
   filterDiv: document.getElementById('filterDiv'),
   // Theme switch
-  themeSwitch: document.getElementById('switch')
+  themeSwitch: document.getElementById('switch'),
+  columnDivs: document.querySelectorAll('.column-div')//
 };
 console.log(elements);
 //make sure to comeback here, not sure what to do but i have an idea
@@ -88,7 +89,7 @@ function filterAndDisplayTasksByBoard(boardName) {
   const filteredTasks = tasks.filter(task => task.board === boardName);
 
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
-
+// the boards werent should because columnDiv wasnt defined!!
   elements.columnDivs.forEach(column => {
     const status = column.getAttribute("data-status");
     // Reset column content while preserving the column title
