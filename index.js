@@ -274,6 +274,8 @@ function toggleTheme() {
 
 function openEditTaskModal(task) {
   const editModel = document.getElementById("edit-task-form");
+  const editModalWindow = document.querySelector("edit-task-modal-window");
+  editModalWindow.style.display = show ? 'block' : 'none'
   // Set task details in modal inputs
   // Get button elements from the task modal
   // Call saveTaskChanges upon click of Save Changes button

@@ -414,7 +414,7 @@ header {
   font-weight: 500;
   font-size: 14px;
   border-radius: 10px;
-  display: none;/*Remember to change it back to none if it isnt already*/
+  display: flex;/*Remember to change it back to none if it isnt already*/
   z-index: 3;
   transition: all 0.3s ease-in;
 }
