@@ -1,4 +1,4 @@
-export const initialData = [
+const initialData = [
     {
       "id": 1,
       "title": "Launch Epic Career 🚀",
@@ -91,3 +91,4 @@ export const initialData = [
         "board": "Launch Career"
     }
 ];
+export default initialData;

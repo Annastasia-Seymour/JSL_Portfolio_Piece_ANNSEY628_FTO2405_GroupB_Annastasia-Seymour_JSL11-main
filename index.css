@@ -5,7 +5,7 @@
   box-sizing: inherit;
 }
 
-:root {
+:root {/*Took forever but figured this is dark theme*/
   --primary-color: #2b2f37;
   --secondary-color: #21202c;
   --primary-font-color: white;
@@ -13,12 +13,14 @@
   --primary-box-shadow: 0px 8px 18px 0px rgba(45, 45, 60, 0.56);
 }
 
+/* Light theme styles */
 .light-theme {
   --primary-color: #ffffff;
-  --secondary-color: #e6e6e6;
+  --secondary-color: #a04646;
   --primary-font-color: #000000;
   --secondary-font-color: #828fa3;
   --primary-box-shadow: 0px 8px 18px 0px rgba(176, 176, 188, 0.56);
+  border: 5px solid red;
 }
 
 body {
@@ -244,7 +246,7 @@ header {
 }
 
 .container {
-  display: flex;
+  display: flex; /*Remember to change it back to none if it isnt already*/
   flex-direction: column;
   /* flex: 5; */
   /* border: 5px solid rgb(170, 211, 58); */
@@ -262,7 +264,7 @@ header {
 
 .column-div {
   flex: 1;
-  display: flex;
+  display: flex; /*Remember to change it back to none if it isnt already*/
   flex-direction: column;
   gap: 20px;
   padding: 20px;
@@ -272,7 +274,7 @@ header {
 }
 
 .task-div {
-  display: flex;
+  display: flex; /*Remember to change it back to none if it isnt already*/
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
@@ -292,7 +294,7 @@ header {
 }
 
 .side-bar-bottom {
-  display: flex;
+  display: flex; /*Remember to change it back to none if it isnt already*/
   justify-content: center;
   flex-direction: column;
   gap: 20px;
@@ -402,7 +404,7 @@ header {
   font-weight: 500;
   font-size: 14px;
   border-radius: 10px;
-  display: none;
+  display: none;/*Remember to change it back to none if it isnt already*/
   z-index: 3;
   transition: all 0.3s ease-in;
 }
@@ -583,7 +585,7 @@ h2 {
   font-weight: 500;
   font-size: 14px;
   border-radius: 10px;
-  display: none;
+  display: flex;
   z-index: 3;
   transition: all 0.3s ease-in;
 }

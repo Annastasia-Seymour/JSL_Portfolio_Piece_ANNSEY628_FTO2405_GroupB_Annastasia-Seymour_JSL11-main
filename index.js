@@ -19,7 +19,7 @@ initializeData();
 // TASK: Get elements from the DOM
 const elements = {
   // Get the task list container or any other container where tasks are displayed
-  taskList: document.querySelector('#add-new-task-btn'), // Assuming this is where tasks are listed
+  taskButton: document.querySelector('#add-new-task-btn'), // Assuming this is where tasks are listed
 
   // New Task Modal
   newTask: document.getElementById('new-task-modal-window'),
@@ -70,8 +70,10 @@ function displayBoards(boards) {
   const boardsContainer = document.getElementById("boards-nav-links-div");
   boardsContainer.innerHTML = ''; // Clears the container
   boards.forEach(board => {
+    
     const boardElement = document.createElement("button");
     boardElement.textContent = board;
+
     boardElement.classList.add("board-btn");
     boardElement.addEventListener('click', function() {
       elements.headerBoardName.textContent = board;
@@ -216,60 +218,65 @@ function toggleModal(show, modal = elements.modalWindow) {
  * **********************************************************************************************************************************************/
 
 function addTask(event) {
-  event.preventDefault(); 
+  event.preventDefault();
+  
+  // Assign user input to the task object
+  const task = { 
+    userInput : document.getElementById("modal-title-input"),// gets the task title
+    userDescription : document.getElementById("modal-desc-input"),// gets the task description
+    userStatus: document.getElementById("modal-select-status")//gets the status
+    // Add task properties here
+  };
 
-  //Assign user input to the task object
-    const task = {
-      
-    };
-    const newTask = createNewTask(task);
-    if (newTask) {
-      addTaskToUI(newTask);
-      toggleModal(false);
-      elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-      event.target.reset();
-      refreshTasksUI();
-    }
+const titleValue = task.userInput.value;
+const descriptionValue = task.userDescription.value;
+const statusValue = task.userStatus.value;
+
+const newTaskData = {
+title: titleValue,
+description: descriptionValue,
+state: statusValue
+};
+console.log(newTaskData);
+  const newTask = createNewTask(newTaskData);
+  if (newTask) {
+    addTaskToUI(newTask);
+    toggleModal(false);
+    elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
+    event.target.reset(); // Ensure this targets the correct form
+    refreshTasksUI();
+  }
 }
 
-
 function toggleSidebar(show) {
- sideBar = document.getElementById("side-bar-div");
- const mainContent = document.querySelector(".card-column-main");
+  const sidebar = document.getElementById('sidebar'); // Ensure this matches your sidebar's ID
+  if (show) {
+    sidebar.style.display = 'block'; // or add a class to show the sidebar
+  } else {
+    sidebar.style.display = 'none'; // or add a class to hide the sidebar
+  }
 }
 
 function toggleTheme() {
-  themeSwitch.classList.toggle("light-theme");
+  const body = document.body;
+  
+ 
 }
-
 
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-  
-
   // Get button elements from the task modal
-
-
   // Call saveTaskChanges upon click of Save Changes button
- 
-
   // Delete task using a helper function and close the task modal
-
 
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
-  
-
   // Create an object with the updated task details
-
-
-  // Update task using a hlper functoin
- 
-
+  // Update task using a helper function
   // Close the modal and refresh the UI to reflect the changes
 
   refreshTasksUI();
@@ -277,7 +284,8 @@ function saveTaskChanges(taskId) {
 
 /*************************************************************************************************************************************************/
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
+  toggleTheme(); // Call toggleTheme without parentheses
   init(); // init is called after the DOM is fully loaded
 });
 
