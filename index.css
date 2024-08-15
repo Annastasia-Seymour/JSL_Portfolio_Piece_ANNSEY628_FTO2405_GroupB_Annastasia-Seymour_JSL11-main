@@ -74,7 +74,7 @@ body {
 }
 
 .boards-nav-links-div {
-  display: none;
+  display: flex;
   flex-direction: column;
   color: var(--primary-font-color);
   gap: 18px;
@@ -82,7 +82,7 @@ body {
   margin-top: 50px;
 }
 /*#boards-nav-links-div {
-  display: none;
+  display:flex;
 }*/
 
 
@@ -181,7 +181,7 @@ h4 {
 }
 
 .hide-side-bar-div {
-  display: none;
+  display:flex;
   flex-direction: row;
   justify-content: flex-start;
   margin-left: 50px;
@@ -196,7 +196,7 @@ h4 {
   bottom: 45px;
   border-radius: 0 20px 20px 0;
   background-color: #219C90;
-  display: none;
+  display:flex;
   cursor: pointer;
 }
 
@@ -466,7 +466,7 @@ header {
   justify-content: space-around;
   padding: 10px;
   width: 130px;
-  display: none;
+  display:flex;
 }
 
 #editBoardDiv {
@@ -484,7 +484,7 @@ header {
   width: 120px;
   height: 50px;
   border-radius: 8px;
-  display: none;
+  display:flex;
   z-index: 5;
 }
 
@@ -581,19 +581,20 @@ h2 {
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 1px;
+  text-align: center;
 }
 
 
 .modal-window {
   /* border: 5px solid red; */
-  display: none;
+  display:flex;
   flex-direction: column;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 600px;
-  display: none;
+  display:flex;
   flex-direction: column;
   padding: 30px;
   gap: 20px;
@@ -736,7 +737,7 @@ input {
   height: 100%;
   width: 100%;
   position: absolute;
-  display: none;
+  display:flex;
   z-index: 2;
 }
 
@@ -809,7 +810,7 @@ input:checked + #label-checkbox-theme:after {
 }
 
 .dropdownBtn {
-  display: none;
+  display:flex;
 }
 
 .side-bar.show-sidebar {
@@ -817,7 +818,7 @@ input:checked + #label-checkbox-theme:after {
 }
 
 .logo-mobile {
-  display: none;
+  display:flex;
 }
 
 @media screen and (max-width: 800px) {
@@ -826,7 +827,7 @@ input:checked + #label-checkbox-theme:after {
     } */
 
   /* .side-bar.show-sidebar {
-    display: none !important;
+    display:flex !important;
   }
 
 
@@ -900,7 +901,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   #side-logo-div {
-    display: none;
+    display:flex;
   }
 
   .side-bar-bottom {
@@ -946,7 +947,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   .side-bar {
-    display: none;
+    display:flex;
     padding: 0;
     height: 60%;
     width: 30%;
@@ -1133,7 +1134,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   #side-logo-div {
-    display: none;
+    display:flex;
   }
 
   .side-bar-bottom {
@@ -1143,7 +1144,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   .hide-side-bar-div {
-    display: none;
+    display:flex;
   }
 
   .toggle-div {
@@ -1189,7 +1190,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   .side-bar {
-    display: none;
+    display:flex;
     padding: 0;
     height: 60%;
     width: 60%;
