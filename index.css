@@ -416,6 +416,9 @@ header {
   z-index: 3;
   transition: all 0.3s ease-in;
 }
+#edit-task-form {
+  display: flex; /* Show modal, change to flex but sort out onclick */
+}
 
 .edit-btn {
   position: absolute;

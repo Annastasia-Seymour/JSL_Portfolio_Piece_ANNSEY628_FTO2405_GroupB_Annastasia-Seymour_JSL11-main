@@ -107,6 +107,7 @@ function filterAndDisplayTasksByBoard(boardName) {
       taskElement.classList.add("task-div");
       taskElement.textContent = task.title;
       taskElement.setAttribute('data-task-id', task.id);
+      
     
       // Listen for a click event on each task and open a modal
       taskElement.addEventListener('click',() => { 
@@ -347,8 +348,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function openEditTaskModal(task) {
  // get new user inputs
-  const editModalWindow = document.querySelector("edit-task-modal-window");
-  editModalWindow.style.display = show ? 'block' : 'none';
+  const editModalWindow = document.querySelector("#edit-task-form");
+  console.log(editModalWindow);
+  editModalWindow.style.display = "flex"; // Show the edit task modal
+
 
   // Set task details in modal inputs
   document.getElementById("edit-task-title-input").value = task.title;
@@ -367,13 +370,13 @@ function openEditTaskModal(task) {
 
   // Delete task using a helper function and close the task modal
   deleteButton.onclick = function() {
-    deleteTask(task.id); // calls the delete function
-    toggleModal(false, editModalWindow); // Closes the modal window
+    deleteTask(task.id);
+    editModalWindow.style.display= "edit-task-modal-window" // Closes the modal window
   };
 
 
 
-  toggleModal(true,editModalWindow); // Show the edit task modal
+  toggleModal(true,editModalWindow);
 }
 
 
