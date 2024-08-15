@@ -318,6 +318,8 @@ const svgDark = `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 }// theme switch works well
 //i need to swop logo based on themes
 //WOOHOOO ITS WORKS IM SUCH A GENIUS!!!!!!
+//no actually its dumb!!!!
+
 
 
 
