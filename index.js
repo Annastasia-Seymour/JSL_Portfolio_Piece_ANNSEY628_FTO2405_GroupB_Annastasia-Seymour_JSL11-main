@@ -165,6 +165,7 @@ function addTaskToUI(task) {
 
 
 function setupEventListeners() {
+ 
   // Cancel editing task event listener
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
   if (cancelEditBtn) {
@@ -206,6 +207,11 @@ function setupEventListeners() {
     addTask(event)
   });
 }
+//updates the task form submission of existing tasks first attempt
+/*elements.updateTask.addEventListener('click', () => {
+  toggleModal(true);
+  elements.filterDiv.style.display = 'block'; // Also show the filter overlay
+}); */
 
 // Toggles tasks modal
 // Task: Fix bugs
@@ -275,6 +281,8 @@ function openEditTaskModal(task) {
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
 
+
+//remember to call the function saveTaskChanges
 function saveTaskChanges(taskId) {
   // Get new user inputs
   const newUserInput = document.getElementById("task-title-input");
