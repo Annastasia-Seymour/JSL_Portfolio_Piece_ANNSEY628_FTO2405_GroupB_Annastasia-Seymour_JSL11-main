@@ -265,49 +265,48 @@ function toggleSidebar(show) {
   }
 }
 
+const svgLight = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="478" height="81" viewBox="0 0 478 81" xml:space="preserve">
+<desc>Created with Fabric.js 5.2.4</desc>
+<defs></defs>
+<g transform="matrix(0 0 0 0 0 0)" id="3528eec2-dfd0-4c04-a6e8-66a43c0561b1"></g>
+<g transform="matrix(1 0 0 1 239 40.5)" id="95afc617-cc57-4d07-bb17-78f7285e8bde">
+  <rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke" x="-239" y="-40.5" rx="0" ry="0" width="478" height="81" />
+</g>
+<g transform="matrix(0.09 0 0 0.09 0 40.5)" style="" id="b86d6ad2-4d31-4d60-a2b7-633de9bb16e6">
+  <text xml:space="preserve" font-family="Raleway" font-size="650" font-style="normal" font-weight="900" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="0" y="80" >AGILE BOARD✨</tspan></text>
+</g>
+</svg>`;
+const svgDark = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="478" height="81" viewBox="0 0 478 81" xml:space="preserve">
+<desc>Created with Fabric.js 5.2.4</desc>
+<defs></defs>
+<g transform="matrix(0 0 0 0 0 0)" id="3528eec2-dfd0-4c04-a6e8-66a43c0561b1"></g>
+<g transform="matrix(1 0 0 1 239 40.5)" id="95afc617-cc57-4d07-bb17-78f7285e8bde">
+  <rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke" x="-239" y="-40.5" rx="0" ry="0" width="478" height="81" />
+</g>
+<g transform="matrix(0.09 0 0 0.09 0 40.5)" style="" id="b86d6ad2-4d31-4d60-a2b7-633de9bb16e6">
+  <text xml:space="preserve" font-family="Raleway" font-size="650" font-style="normal" font-weight="900" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="0" y="80" >AGILE BOARD✨</tspan></text>
+</g>
+</svg>`;
+
+
 function toggleTheme() {
   const body = document.body;
-  const logo = document.getElementById("logo"); //links logo
-  const svgLight =`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="478" height="81" viewBox="0 0 478 81" xml:space="preserve">
-<desc>Created with Fabric.js 5.2.4</desc>
-<defs>
-</defs>
-<g transform="matrix(0 0 0 0 0 0)" id="3528eec2-dfd0-4c04-a6e8-66a43c0561b1">
-</g>
-<g transform="matrix(1 0 0 1 239 40.5)" id="95afc617-cc57-4d07-bb17-78f7285e8bde">
-<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-239" y="-40.5" rx="0" ry="0" width="478" height="81" />
-</g>
-<g transform="matrix(0.09 0 0 0.09 0 40.5)" style="" id="b86d6ad2-4d31-4d60-a2b7-633de9bb16e6">
-    <text xml:space="preserve" font-family="Raleway" font-size="650" font-style="normal" font-weight="900" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="0" y="80" >AGILE BOARD✨</tspan></text>
-</g>
-</svg>`;
-  const svgDark = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="478" height="81" viewBox="0 0 478 81" xml:space="preserve">
-<desc>Created with Fabric.js 5.2.4</desc>
-<defs>
-</defs>
-<g transform="matrix(0 0 0 0 0 0)" id="3528eec2-dfd0-4c04-a6e8-66a43c0561b1">
-</g>
-<g transform="matrix(1 0 0 1 239 40.5)" id="95afc617-cc57-4d07-bb17-78f7285e8bde">
-<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-239" y="-40.5" rx="0" ry="0" width="478" height="81" />
-</g>
-<g transform="matrix(0.09 0 0 0.09 0 40.5)" style="" id="b86d6ad2-4d31-4d60-a2b7-633de9bb16e6">
-    <text xml:space="preserve" font-family="Raleway" font-size="650" font-style="normal" font-weight="900" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="0" y="80" >AGILE BOARD✨</tspan></text>
-</g>
-</svg>`;
-
-  body.classList.toggle('light-theme');
-    // Determine if the light theme is currently active
-  const isLightTheme = body.classList.contains('light-theme');
-
-  // Store the theme preference in localStorage
-  localStorage.setItem('light-theme', isLightTheme ? 'disabled' : 'enabled');
-
+  const logo = document.getElementById("logo"); // Ensure this ID matches your HTML
+ 
+  // Toggle theme
+  
+  const isLightTheme = body.classList.toggle('light-theme');
+  logo.innerHTML = isLightTheme ? svgDark : svgLight; 
   // Update the logo based on the current theme
   if (isLightTheme) {
-    logo.innerHTML = svgLight; //add svg for light icon into innerhtml from the backend
+    logo.innerHTML = svgLight;
   } else {
-    logo.innerHTML = svgDark;//add svg for dark icon into innerhtml from the backend
+    logo.innerHTML = svgDark;
   }
+
+  // Save the theme preference
+  localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+
 }// theme switch works well
 //i need to swop logo based on themes
 //WOOHOOO ITS WORKS IM SUCH A GENIUS!!!!!!
