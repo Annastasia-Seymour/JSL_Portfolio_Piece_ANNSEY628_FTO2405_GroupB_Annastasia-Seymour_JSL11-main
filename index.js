@@ -218,23 +218,25 @@ function addTask(event) {
   event.preventDefault();
   
   // Assign user input to the task object
-  const task = { 
+  // trying to take i out of an object
+  /*const task = { 
     userInput : document.getElementById("modal-title-input"),// gets the task title
     userDescription : document.getElementById("modal-desc-input"),// gets the task description
     userStatus: document.getElementById("modal-select-status")//gets the status
     // Add task properties here
-  };
+  };*/
 
-const titleValue = task.userInput.value;
-const descriptionValue = task.userDescription.value;
-const statusValue = task.userStatus.value;
-
+  const titleValue = document.getElementById("title-input").value;
+  const descriptionValue = document.getElementById("desc-input").value;
+  const statusValue = document.getElementById("select-status").value;
+ 
 const newTaskData = {
 title: titleValue,
 description: descriptionValue,
 state: statusValue
 };
 console.log(newTaskData);
+
   const newTask = createNewTask(newTaskData);
   if (newTask) {
     addTaskToUI(newTask);
@@ -246,7 +248,7 @@ console.log(newTaskData);
 }
 
 function toggleSidebar(show) {
-  const sidebar = document.getElementById('sidebar'); // Ensure this matches your sidebar's ID
+  const sidebar = elements.sideBar; // Ensure this matches your sidebar's ID
   if (show) {
     sidebar.style.display = 'block'; // or add a class to show the sidebar
   } else {
