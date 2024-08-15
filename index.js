@@ -267,9 +267,19 @@ function toggleSidebar(show) {
 
 function toggleTheme() {
   const body = document.body;
+  const logo = document.getElementById("logo"); //fetches logo
   body.classList.toggle('light-theme');
-  localStorage.setItem('light-theme', body.classList.contains('light-theme') ? 'disabled' : 'enabled');
+  const isLightTheme = body.classList.contains('light-theme');
+  localStorage.setItem('light-theme', isLightTheme ? 'disabled' : 'enabled');
+
+  if (isLightTheme) {
+    logo.src ='./assets/logo-light.svg'; //add svg for light icon
+  } else {
+    logo.src ='./assets/logo-dark.svg';//add svg for dark icon
+  }
 }// theme switch works well
+//i need to swop logo based on themes
+
 
 
 function openEditTaskModal(task) {
@@ -285,12 +295,12 @@ function openEditTaskModal(task) {
 }
 
 
-//remember to call the function saveTaskChanges
+//remember to call the function saveTaskChanges, this is for updates aka patches
 function saveTaskChanges(taskId) {
   // Get new user inputs
-  const newUserInput = document.getElementById("task-title-input");
-  const newUserDescription = document.getElementById("edit-task-description-input");
-  const newUserStatus = document.getElementById("edit-select-status");
+  const newUserInput = document.getElementById("task-title-input").value;
+  const newUserDescription = document.getElementById("edit-task-description-input").value;
+  const newUserStatus = document.getElementById("edit-select-status").value;
   // remember to go back here const editTask = patchTask(updatedTaskData);
   
   // Create an object with the updated task details
@@ -301,7 +311,7 @@ function saveTaskChanges(taskId) {
     };
   console.log(updatedTaskData);
   // Update task using a helper function
-  
+  patchTask(taskId, updatedTaskData)
   // Close the modal and refresh the UI to reflect the changes
   toggleModal(false);
   refreshTasksUI();
