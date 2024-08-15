@@ -322,15 +322,34 @@ const svgDark = `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 
 
 function openEditTaskModal(task) {
-  const editModel = document.getElementById("edit-task-form");
+ // get new user inputs
   const editModalWindow = document.querySelector("edit-task-modal-window");
   editModalWindow.style.display = show ? 'block' : 'none';
-  // Set task details in modal inputs
-  // Get button elements from the task modal
-  // Call saveTaskChanges upon click of Save Changes button
-  // Delete task using a helper function and close the task modal
 
-  toggleModal(true, elements.editTaskModal); // Show the edit task modal
+  // Set task details in modal inputs
+  document.getElementById("edit-task-title-input").value = task.title;
+  document.getElementById("edit-task-desc-input").value = task.description;
+  document.getElementById("edit-select-status").value = task.state;
+
+  // Get button elements from the task modal
+  const saveButton = document.getElementById("save-task-changes-btn"); 
+  const deleteButton = document.getElementById("delete-task-btn");
+
+  // Call saveTaskChanges upon click of Save Changes button
+  saveButton.onclick = function() {
+    saveTaskChanges(task.id);
+    console.log(saveTaskChanges);
+    };
+
+  // Delete task using a helper function and close the task modal
+  deleteButton.onclick = function() {
+    deleteTask(task.id); // calls the delete function
+    toggleModal(false, editModalWindow); // Closes the modal window
+  };
+
+
+
+  toggleModal(true,editModalWindow); // Show the edit task modal
 }
 
 

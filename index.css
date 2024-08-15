@@ -523,11 +523,12 @@ header {
 }
 
 .deleteBoardWindowBtns {
-  display: flex;
+  display: none;
   justify-content: space-between;
 }
 
 #delete-board {
+  display: none;
   width: 280px;
   background-color: #ea5555;
 }
