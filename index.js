@@ -15,6 +15,7 @@ function initializeData() {
     console.log('Data already exists in localStorage');
   }
 }
+//console.log(localStorage)
 initializeData();
 // TASK: Get elements from the DOM
 const elements = {
@@ -38,7 +39,7 @@ const elements = {
   themeSwitch: document.getElementById('switch'),
   columnDivs: document.querySelectorAll('.column-div')//
 };
-console.log(elements);
+console.log(elements);// trouble shoot'n
 //make sure to comeback here, not sure what to do but i have an idea
 
 
@@ -89,7 +90,7 @@ function filterAndDisplayTasksByBoard(boardName) {
   const filteredTasks = tasks.filter(task => task.board === boardName);
 
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
-// the boards werent should because columnDiv wasnt defined!!
+// the boards werent showing because columnDiv wasnt defined!! coding can be a nightmare
   elements.columnDivs.forEach(column => {
     const status = column.getAttribute("data-status");
     // Reset column content while preserving the column title
@@ -115,6 +116,7 @@ function filterAndDisplayTasksByBoard(boardName) {
       tasksContainer.appendChild(taskElement);
     });
   });
+// we can add if else for validation
 
 }
 
@@ -219,7 +221,7 @@ function addTask(event) {
   event.preventDefault();
   
   // Assign user input to the task object
-  // trying to take i out of an object
+  // trying to take {} out of an object
   /*const task = { 
     userInput : document.getElementById("modal-title-input"),// gets the task title
     userDescription : document.getElementById("modal-desc-input"),// gets the task description
@@ -243,7 +245,7 @@ console.log(newTaskData);
     addTaskToUI(newTask);
     toggleModal(false);
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-    event.target.reset(); // Ensure this targets the correct form this was low key confusing
+    event.target.reset(); // Ensure this targets the correct form ,this was low key confusing
     refreshTasksUI();
   }
 }
@@ -275,10 +277,21 @@ function openEditTaskModal(task) {
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
+  const newUserInput = document.getElementById("task-title-input");
+  const newUserDescription = document.getElementById("edit-task-description-input");
+  const newUserStatus = document.getElementById("edit-select-status");
+  
   // Create an object with the updated task details
+  const updatedTaskData = {
+    title: newUserInput,
+    description: newUserDescription,
+    state: newUserStatus
+    };
+  console.log(updatedTaskData);
   // Update task using a helper function
+  const editTask = patchTask(updatedTaskData);
   // Close the modal and refresh the UI to reflect the changes
-
+  toggleModal(false);
   refreshTasksUI();
 }
 
