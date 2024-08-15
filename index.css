@@ -51,7 +51,7 @@ body {
   /* border: 5px solid rgb(0, 0, 0); */
   border-right: 0.1px solid #979797;
   /* flex: 0.8; */
-  display: flex;/*remember to change to none on start up*/
+  display: none;/*remember to change to none on start up*/
   flex-direction: column;
   gap: 50px;
   /* padding-left: 50px; */
@@ -456,7 +456,7 @@ header {
   justify-content: space-around;
   padding: 10px;
   width: 130px;
-  display:flex;
+  display:none;
 }
 
 #editBoardDiv {
@@ -474,7 +474,7 @@ header {
   width: 120px;
   height: 50px;
   border-radius: 8px;
-  display:flex;
+  display:none;
   z-index: 5;
 }
 
@@ -513,7 +513,7 @@ header {
 }
 
 .deleteBoardWindowBtns {
-  display: none;
+  display: flex;
   justify-content: space-between;
 }
 
@@ -593,7 +593,7 @@ h2 {
   font-weight: 500;
   font-size: 14px;
   border-radius: 10px;
-  display: flex;
+  display: none;
   z-index: 3;
   transition: all 0.3s ease-in;
 }
@@ -728,7 +728,7 @@ input {
   height: 100%;
   width: 100%;
   position: absolute;
-  display:flex;
+  display:none;
   z-index: 2;
 }
 
@@ -801,7 +801,7 @@ input:checked + #label-checkbox-theme:after {
 }
 
 .dropdownBtn {
-  display:flex;
+  display:none;
 }
 
 .side-bar.show-sidebar {
@@ -809,7 +809,7 @@ input:checked + #label-checkbox-theme:after {
 }
 
 .logo-mobile {
-  display:flex;
+  display:none;
 }
 
 @media screen and (max-width: 800px) {
@@ -892,7 +892,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   #side-logo-div {
-    display:flex;
+    display:none;
   }
 
   .side-bar-bottom {
@@ -902,7 +902,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   .hide-side-bar-div {
-    display: flex;
+    display: none;
     translate: 20.5s;
   }
 
@@ -938,7 +938,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   .side-bar {
-    display:flex;
+    display:none;
     padding: 0;
     height: 60%;
     width: 30%;
@@ -1125,7 +1125,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   #side-logo-div {
-    display:flex;
+    display:none;
   }
 
   .side-bar-bottom {
@@ -1181,7 +1181,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   .side-bar {
-    display:flex;
+    display:none;
     padding: 0;
     height: 60%;
     width: 60%;
@@ -1231,7 +1231,7 @@ input:checked + #label-checkbox-theme:after {
 
   #edit-board-btn {
     top: 17px;
-    display: flex;
+    display: none;
     right: 10px;
     /* border: 2px solid red; */
     padding: 0;
