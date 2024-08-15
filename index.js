@@ -121,8 +121,11 @@ function filterAndDisplayTasksByBoard(boardName) {
 }
 
 function refreshTasksUI() {
-  filterAndDisplayTasksByBoard(activeBoard);
+  //filterAndDisplayTasksByBoard(activeBoard);
+
+  
 }
+
 
 // Styles the active board by adding an active class
 // TASK: Fix Bugs
@@ -239,20 +242,37 @@ function addTask(event) {
   const descriptionValue = document.getElementById("desc-input").value;
   const statusValue = document.getElementById("select-status").value;
  
+  // Because of error index.js:145 Column not found for status: undefined i need to check if statusValue appears
+  if (!statusValue) {
+    console.error('Status value is not defined.');
+    return;
+  }
+
 const newTaskData = {
 title: titleValue,
 description: descriptionValue,
-state: statusValue
+state: statusValue,
+board: activeBoard // added to object to ensure the new task is added to the respective board
 };
 console.log(newTaskData);
 
   const newTask = createNewTask(newTaskData);
   if (newTask) {
+
+    const tasks = getTasks();
+    //call the function! ill send the function to the refreshTasksUI()
+     
+     tasks.push(newTask);
+     //sends the task to the local storage
+     localStorage.setItem('tasks', JSON.stringify(tasks));
+
     addTaskToUI(newTask);
     toggleModal(false);
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
     event.target.reset(); // Ensure this targets the correct form ,this was low key confusing
     refreshTasksUI();
+  }else {
+    console.error('Failed to create a new task');
   }
 }
 
@@ -303,6 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //i need to swop logo based on themes
 //WOOHOOO ITS WORKS IM SUCH A GENIUS!!!!!!
 //no actually its dumb!!!!
+//Also sorry for exclaiming in the commit , its past midnight ive been trying to figure it out for almost 14hours 
 
 
 
