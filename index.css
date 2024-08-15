@@ -274,7 +274,7 @@ header {
 
 .column-div {
   flex: 1;
-  display: flex; /*Remember to change it back to none if it isnt already*/
+  display: flex; /*Remember to change it back to none if it isn't already*/
   flex-direction: column;
   gap: 20px;
   padding: 20px;
@@ -284,7 +284,7 @@ header {
 }
 
 .task-div {
-  display: flex; /*Remember to change it back to none if it isnt already*/
+  display: flex; /*Remember to change it back to none if it isn't already. this one we'll leave because it shows the content */
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;

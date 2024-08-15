@@ -273,6 +273,7 @@ function toggleTheme() {
 
 
 function openEditTaskModal(task) {
+  const editModel = document.getElementById("edit-task-form");
   // Set task details in modal inputs
   // Get button elements from the task modal
   // Call saveTaskChanges upon click of Save Changes button
@@ -288,6 +289,7 @@ function saveTaskChanges(taskId) {
   const newUserInput = document.getElementById("task-title-input");
   const newUserDescription = document.getElementById("edit-task-description-input");
   const newUserStatus = document.getElementById("edit-select-status");
+  // remember to go back here const editTask = patchTask(updatedTaskData);
   
   // Create an object with the updated task details
   const updatedTaskData = {
@@ -297,7 +299,7 @@ function saveTaskChanges(taskId) {
     };
   console.log(updatedTaskData);
   // Update task using a helper function
-  const editTask = patchTask(updatedTaskData);
+  
   // Close the modal and refresh the UI to reflect the changes
   toggleModal(false);
   refreshTasksUI();
