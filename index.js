@@ -16,7 +16,7 @@ function initializeData() {
   }
 }
 //console.log(localStorage)
-initializeData();
+
 // TASK: Get elements from the DOM
 const elements = {
   // Get the task list container or any other container where tasks are displayed
@@ -39,7 +39,7 @@ const elements = {
   filterDiv: document.getElementById('filterDiv'),
   // Theme switch
   themeSwitch: document.getElementById('switch'),
-  editModalWindow : document.querySelector("#edit-modal-window"),
+  editModalWindow : document.querySelector(".edit-task-modal-window"),
   editSelectStatus: document.getElementById("edit-select-status"),
     columnDivs: document.querySelectorAll('.column-div'),//
   clearStorage :  document.getElementById('clear-storage-button')
@@ -160,6 +160,7 @@ function styleActiveBoard(boardName) {
 function addTaskToUI(task) {
   //const task = getTasks();
   //console.log(`Task state: ${task.state}`); // Log task state for debugging
+  console.log(task);
   const column = document.querySelector(`.column-div[data-status="${task.state}"]`);
   if (!column) {
     console.error(`Column not found for status: ${task.state}`);
@@ -188,18 +189,19 @@ function setupEventListeners() {
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
   if (cancelEditBtn) {
     cancelEditBtn.addEventListener('click', () => {
+      console.log(elements.editModalWindow);
       toggleModal(false, elements.editTaskModal);
     });
   }
   // Cancel adding new task event listener
   const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
   cancelAddTaskBtn.addEventListener('click', () => {
-    toggleModal(false);
+    toggleModal(false,elements.addModalWindow);
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
   });
   // Clicking outside the modal to close it
   elements.filterDiv.addEventListener('click', () => {
-    toggleModal(false);
+    toggleModal(false, elements.addModalWindow);
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
   });
   // Show sidebar event listener
@@ -242,15 +244,8 @@ function toggleModal(show, modal ) {
 
 function addTask(event) {
   event.preventDefault();
-  toggleModal(true, addModalWindow)
+  toggleModal(true, elements.addModalWindow)
     // Assign user input to the task object
-  // trying to take {} out of an object
-  /*const task = { 
-    userInput : document.getElementById("modal-title-input"),// gets the task title
-    userDescription : document.getElementById("modal-desc-input"),// gets the task description
-    userStatus: document.getElementById("modal-select-status")//gets the status
-    // Add task properties here
-  };*/
   // Assign user input to the task object
   
   const titleValue = document.getElementById("title-input").value;
@@ -264,14 +259,14 @@ function addTask(event) {
     return;
   }
 
-  const newTaskData = {
+  const task = {
     //id: Date.now(), // unique id
     title: titleValue,
     description: descriptionValue,
     state: statusValue, // Ensure this matches your column's data attribute
     board: activeBoard
   };
-console.log(newTaskData);
+console.log(task);
 
 const newTask = createNewTask(task);
     if (newTask) {
@@ -345,21 +340,21 @@ function addEventListenersToModalButtons(taskId, editModalWindow) {
       saveTaskChanges(taskId);
     } catch (error) {
       console.error("Error saving task changes:", error);
-    }
+    } 
   });
 
   deleteButton.addEventListener('click', (event) => {
     event.preventDefault();
     try {
-      deleteTask(taskId);
-      refreshTasksUI();
-      toggleModal(false, editModalWindow);
+    deleteTask(taskId);
+    toggleModal(false,editModalWindow);
     } catch (error) {
-      console.error("Error deleting task:", error);
-    }
+      console.error("Error saving task changes:", error);
+    } 
   });
-}
 
+
+}
 //remember to call the function saveTaskChanges, this is for updates aka patches
 function saveTaskChanges(taskId) {
   // Get new user inputs
@@ -392,6 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function init() {
+  initializeData();
   setupEventListeners();
   const showSidebar = localStorage.getItem('showSideBar') === 'true';
   toggleSidebar(showSidebar);
