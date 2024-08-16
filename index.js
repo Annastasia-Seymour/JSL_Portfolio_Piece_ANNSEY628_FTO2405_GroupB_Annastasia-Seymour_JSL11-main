@@ -34,6 +34,7 @@ const elements = {
   addNewTaskBtn: document.getElementById('add-new-task-btn'),
   editBoardBtn: document.getElementById('edit-board-btn'),
   addModalWindow: document.getElementById('new-task-modal-window'),
+  const cancelEditBtn = document.getElementById('cancel-edit-btn');
   // Filter overlay
   filterDiv: document.getElementById('filterDiv'),
   // Theme switch
@@ -158,7 +159,7 @@ function styleActiveBoard(boardName) {
 
 function addTaskToUI(task) {
   //const task = getTasks();
-  console.log(`Task state: ${task.state}`); // Log task state for debugging
+  //console.log(`Task state: ${task.state}`); // Log task state for debugging
   const column = document.querySelector(`.column-div[data-status="${task.state}"]`);
   if (!column) {
     console.error(`Column not found for status: ${task.state}`);
@@ -197,7 +198,7 @@ function setupEventListeners() {
     });
   }
 
-  if (elements.filterDiv) {
+  (elements.filterDiv) {
     elements.filterDiv.addEventListener('click', () => {
       toggleModal(false);
       elements.filterDiv.style.display = 'none';
@@ -388,7 +389,7 @@ function saveTaskChanges(taskId) {
   // Update task using a helper function
   patchTask(taskId, updatedTaskData)
   // Close the modal and refresh the UI to reflect the changes
-  toggleModal(false, editModalWindow);
+  toggleModal(false, elements.editModalWindow);
   refreshTasksUI();
 }
 
