@@ -410,6 +410,7 @@ header {
   transform: translate(-50%, -50%);
   width: 600px;
   flex-direction: column;
+  
   padding: 30px;
   gap: 20px;
   background-color: var(--primary-color);
@@ -422,6 +423,7 @@ header {
 }
 #edit-task-form {
   display: flex; /* Show modal, change to flex but sort out onclick */
+  flex-direction: column;/*corrected layout on form*/
 }
 
 .edit-btn {

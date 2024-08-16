@@ -5,7 +5,14 @@ import initialData from './initialData.js';
 /*************************************************************************************************************************************************
  * FIX BUGS!!!
  * **********************************************************************************************************************************************/
-
+//clear storage 
+function clearLocalStorage() {
+  localStorage.clear();
+  console.log("Local storage has been cleared.");
+  // Optionally, refresh the UI or reinitialize application state
+  initializeData();
+  refreshTasksUI(); // Example: Refresh UI after clearing storage
+}
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
   if (!localStorage.getItem('tasks')) {
@@ -47,13 +54,7 @@ const elements = {
 console.log(elements);// trouble shoot'n
 //make sure to comeback here, not sure what to do but i have an idea
 
-//clear storage 
-function clearLocalStorage() {
-  localStorage.clear();
-  console.log("Local storage has been cleared.");
-  // Optionally, refresh the UI or reinitialize application state
-  refreshTasksUI(); // Example: Refresh UI after clearing storage
-}
+
 
 
 let activeBoard = "";
@@ -137,6 +138,9 @@ function filterAndDisplayTasksByBoard(boardName) {
 function refreshTasksUI() {
  
   filterAndDisplayTasksByBoard(activeBoard);
+  //displayBoards(boards);
+  // Re-fetch and filter tasks based on the active board
+  fetchAndDisplayBoardsAndTasks();  // Make sure it updates the tasks based on the current state
   
  console.log("Filtered tasks:", filterAndDisplayTasksByBoard);
 }
@@ -191,6 +195,7 @@ function setupEventListeners() {
     cancelEditBtn.addEventListener('click', () => {
       console.log(elements.editModalWindow);
       toggleModal(false, elements.editTaskModal);
+      elements.filterDiv.style.display = 'none';
     });
   }
   // Cancel adding new task event listener
@@ -247,7 +252,7 @@ function addTask(event) {
   toggleModal(true, elements.addModalWindow)
     // Assign user input to the task object
   // Assign user input to the task object
-  
+
   const titleValue = document.getElementById("title-input").value;
   const descriptionValue = document.getElementById("desc-input").value;
   const statusValue = document.getElementById("select-status").value;
@@ -325,7 +330,7 @@ function openEditTaskModal(task) {
   const selectedStatus = elements.editSelectStatus.querySelector(`option[value="${task.status}"]`);
   selectedStatus.selected = true;
 
-  toggleModal(true, editModalWindow);
+  toggleModal(true, elements.editModalWindow);
 
   addEventListenersToModalButtons(task.id, editModalWindow);
 }
@@ -387,6 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function init() {
+  
   initializeData();
   setupEventListeners();
   const showSidebar = localStorage.getItem('showSideBar') === 'true';
