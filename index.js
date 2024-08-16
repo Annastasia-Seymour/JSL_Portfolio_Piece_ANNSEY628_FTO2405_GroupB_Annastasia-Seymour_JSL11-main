@@ -5,14 +5,7 @@ import initialData from './initialData.js';
 /*************************************************************************************************************************************************
  * FIX BUGS!!!
  * **********************************************************************************************************************************************/
-//clear storage 
-function clearLocalStorage() {
-  localStorage.clear();
-  console.log("Local storage has been cleared.");
-  // Optionally, refresh the UI or reinitialize application state
-  initializeData();
-  refreshTasksUI(); // Example: Refresh UI after clearing storage
-}
+
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
   if (!localStorage.getItem('tasks')) {
@@ -140,9 +133,8 @@ function refreshTasksUI() {
   filterAndDisplayTasksByBoard(activeBoard);
   //displayBoards(boards);
   // Re-fetch and filter tasks based on the active board
-  fetchAndDisplayBoardsAndTasks();  // Make sure it updates the tasks based on the current state
-  
- console.log("Filtered tasks:", filterAndDisplayTasksByBoard);
+  //fetchAndDisplayBoardsAndTasks();  // Make sure it updates the tasks based on the current state
+   console.log("Filtered tasks:", filterAndDisplayTasksByBoard);
 }
 
 
@@ -160,6 +152,15 @@ function styleActiveBoard(boardName) {
   });
 }
 
+//clear storage 
+//uncomment clearLocalStorage at the bottom of code 
+function clearLocalStorage() {
+  localStorage.clear();
+  console.log("Local storage has been cleared.");
+  // Optionally, refresh the UI or reinitialize application state
+  initializeData();
+  refreshTasksUI(); // Example: Refresh UI after clearing storage
+}
 
 function addTaskToUI(task) {
   //const task = getTasks();
@@ -191,19 +192,23 @@ function addTaskToUI(task) {
 
 function setupEventListeners() {
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
-  if (cancelEditBtn) {
+  if (cancelEditBtn) 
     cancelEditBtn.addEventListener('click', () => {
       console.log(elements.editModalWindow);
       toggleModal(false, elements.editTaskModal);
       elements.filterDiv.style.display = 'none';
+
     });
-  }
+  
   // Cancel adding new task event listener
   const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
-  cancelAddTaskBtn.addEventListener('click', () => {
-    toggleModal(false,elements.addModalWindow);
-    elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-  });
+  (cancelAddTaskBtn) 
+    cancelAddTaskBtn.addEventListener('click', () => {
+      toggleModal(false,elements.addModalWindow);
+      elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
+    });
+  
+  
   // Clicking outside the modal to close it
   elements.filterDiv.addEventListener('click', () => {
     toggleModal(false, elements.addModalWindow);
@@ -332,17 +337,15 @@ function openEditTaskModal(task) {
 
   toggleModal(true, elements.editModalWindow);
 
-  addEventListenersToModalButtons(task.id, editModalWindow);
-}
-
-function addEventListenersToModalButtons(taskId, editModalWindow) {
   const saveButton = document.getElementById("save-task-changes-btn");
   const deleteButton = document.getElementById("delete-task-btn");
 
   saveButton.addEventListener('click', (event) => {
     event.preventDefault();
     try {
-      saveTaskChanges(taskId);
+      saveTaskChanges(taskId, elements.saveTaskChanges);
+      toggleModal(false, elements.editModalWindow);
+      
     } catch (error) {
       console.error("Error saving task changes:", error);
     } 
@@ -352,14 +355,13 @@ function addEventListenersToModalButtons(taskId, editModalWindow) {
     event.preventDefault();
     try {
     deleteTask(taskId);
-    toggleModal(false,editModalWindow);
+    toggleModal(false,elements.editModalWindow);
     } catch (error) {
       console.error("Error saving task changes:", error);
     } 
   });
-
-
 }
+
 //remember to call the function saveTaskChanges, this is for updates aka patches
 function saveTaskChanges(taskId) {
   // Get new user inputs
@@ -389,6 +391,7 @@ function saveTaskChanges(taskId) {
 document.addEventListener('DOMContentLoaded', () => {
   toggleTheme(); // Call toggleTheme without parentheses
   init(); // init is called after the DOM is fully loaded
+  
 });
 
 function init() {
@@ -397,6 +400,7 @@ function init() {
   setupEventListeners();
   const showSidebar = localStorage.getItem('showSideBar') === 'true';
   toggleSidebar(showSidebar);
+  //clearLocalStorage();//reset
   const isLightTheme = localStorage.getItem('light-theme') === 'enabled';
   document.body.classList.toggle('light-theme', isLightTheme);
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
