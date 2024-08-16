@@ -174,7 +174,9 @@ h4 {
   display:flex;
   flex-direction: row;
   justify-content: flex-start;
-  margin-left: 50px;
+  margin-top: 20rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #show-side-bar-btn {
@@ -264,6 +266,7 @@ header {
 .card-column-main {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .column-div {
@@ -300,6 +303,7 @@ header {
 .side-bar-bottom {
   display: flex; /*Remember to change it back to none if it isnt already*/
   flex-direction: column; /* Arrange items vertically */
+  
 }
 .side-bar> .side-bar-bottom{
   display: flex; /*Remember to change it back to none if it isnt already*/
@@ -1115,6 +1119,7 @@ input:checked + #label-checkbox-theme:after {
   .boards-nav-links-div {
     gap: 0;
     height: 100%;
+    
   }
 
   .board-btn {
@@ -1156,6 +1161,7 @@ input:checked + #label-checkbox-theme:after {
     width: 80%;
     align-items: center;
     margin: 20px;
+    margin-top: 30rem;
     justify-content: center;
     justify-content: space-around;
     padding: 6px;
@@ -1335,7 +1341,18 @@ input:checked + #label-checkbox-theme:after {
     padding-left: 20px;
     padding-right: 20px;
   }
-
+  #show-side-bar-btn {
+    border: none;
+    width: 50px;
+    height: 40px;
+    z-index: 2;
+    position: absolute;
+    bottom: 45px;
+    border-radius: 0 20px 20px 0;
+    background-color: #219C90;
+    display:flex;
+    cursor: pointer;
+  }
   #add-new-task-btn {
     font-size: 16px;
     padding: 18px;
@@ -1439,4 +1456,33 @@ input:checked + #label-checkbox-theme:after {
   .modal-window {
     width: 30%;
   }
+}
+/*clear storage */
+.footer {
+  position: relative; /* Establishes the context for absolute positioning */
+  padding: 20px; /* Adjust padding as needed */
+  background-color:var(--primary-color); /* Adjust background color as needed */
+  display: none;
+}
+
+.clear-storage-btn {
+  position: absolute;
+  margin-bottom: 10px; /* Distance from the bottom of the footer */
+  background-color: #219C90;
+  color: white;
+  border-radius: 30px;
+  border: 0;
+  font-size: 16px;
+  padding: 18px;
+  padding-left: 35px;
+  padding-right: 35px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 20px;
+
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.clear-storage-btn:hover {
+  background-color: #0056b3; /* Darker color on hover */
 }

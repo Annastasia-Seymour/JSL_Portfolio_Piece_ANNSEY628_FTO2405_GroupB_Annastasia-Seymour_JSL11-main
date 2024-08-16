@@ -33,14 +33,26 @@ const elements = {
   headerBoardName: document.getElementById('header-board-name'),
   addNewTaskBtn: document.getElementById('add-new-task-btn'),
   editBoardBtn: document.getElementById('edit-board-btn'),
+  addModalWindow: document.getElementById('new-task-modal-window'),
   // Filter overlay
   filterDiv: document.getElementById('filterDiv'),
   // Theme switch
   themeSwitch: document.getElementById('switch'),
-  columnDivs: document.querySelectorAll('.column-div')//
+  editModalWindow : document.querySelector("#edit-modal-window"),
+  editSelectStatus: document.getElementById("edit-select-status"),
+    columnDivs: document.querySelectorAll('.column-div'),//
+  clearStorage :  document.getElementById('clear-storage-button')
 };
 console.log(elements);// trouble shoot'n
 //make sure to comeback here, not sure what to do but i have an idea
+
+//clear storage 
+function clearLocalStorage() {
+  localStorage.clear();
+  console.log("Local storage has been cleared.");
+  // Optionally, refresh the UI or reinitialize application state
+  refreshTasksUI(); // Example: Refresh UI after clearing storage
+}
 
 
 let activeBoard = "";
@@ -122,23 +134,10 @@ function filterAndDisplayTasksByBoard(boardName) {
 }
 
 function refreshTasksUI() {
-  const tasks = getTasks();
-  //call the function! ill send the function to the refreshTasksUI()
-  const filteredTasks = tasks.filter (task => task.board === activeBoard);
-
-   // Clear the UI before adding tasks
-   const taskContainer = document.querySelector(".tasks-container");
-   taskContainer.innerHTML = '';
-  
-   filteredTasks.forEach(task => {
-    const taskElement = document.createElement('div');
-    taskElement.textContent = `${task.title}: ${task.description}`;
-    // Add more task details and styles as needed
-    taskContainer.appendChild(taskElement);
-  });
-
-  filterAndDisplayTasksByBoard(activeBoard);
  
+  filterAndDisplayTasksByBoard(activeBoard);
+  
+ console.log("Filtered tasks:", filterAndDisplayTasksByBoard);
 }
 
 
@@ -158,9 +157,11 @@ function styleActiveBoard(boardName) {
 
 
 function addTaskToUI(task) {
-  const column = document.querySelector(`.column-div[data-status="${task.status}"]`); 
+  //const task = getTasks();
+  console.log(`Task state: ${task.state}`); // Log task state for debugging
+  const column = document.querySelector(`.column-div[data-status="${task.state}"]`);
   if (!column) {
-    console.error(`Column not found for status: ${task.status}`);
+    console.error(`Column not found for status: ${task.state}`);
     return;
   }
 
@@ -171,7 +172,7 @@ function addTaskToUI(task) {
     tasksContainer.className = 'tasks-container';
     column.appendChild(tasksContainer);
   }
-
+// Create and add the task element
   const taskElement = document.createElement('div');
   taskElement.className = 'task-div';
   taskElement.textContent = task.title; // Modify as needed
@@ -183,48 +184,65 @@ function addTaskToUI(task) {
 
 
 function setupEventListeners() {
- 
-  // Cancel editing task event listener
-  const cancelEditBtn = document.getElementById('cancel-edit-btn');
-  if (cancelEditBtn) {
-    cancelEditBtn.addEventListener('click', () => {
+  if (elements.cancelEditBtn) {
+    elements.cancelEditBtn.addEventListener('click', () => {
       toggleModal(false, elements.editTaskModal);
     });
   }
-  // Cancel adding new task event listener
-  const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
-  cancelAddTaskBtn.addEventListener('click', () => {
-    toggleModal(false);
-    elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-  });
 
-  // Clicking outside the modal to close it
-  elements.filterDiv.addEventListener('click', () => {
-    toggleModal(false);
-    elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-  });
+  if (elements.cancelAddTaskBtn) {
+    elements.cancelAddTaskBtn.addEventListener('click', () => {
+      toggleModal(false);
+      elements.filterDiv.style.display = 'none';
+    });
+  }
 
-  // Show sidebar event listener
-  elements.hideSideBarBtn.addEventListener('click',() => toggleSidebar(false));
-  elements.showSideBarBtn.addEventListener('click',() => toggleSidebar(true));
+  if (elements.filterDiv) {
+    elements.filterDiv.addEventListener('click', () => {
+      toggleModal(false);
+      elements.filterDiv.style.display = 'none';
+    });
+  }
 
-  // Theme switch event listener
-  elements.themeSwitch.addEventListener('change', toggleTheme);
+  if (elements.hideSideBarBtn) {
+    elements.hideSideBarBtn.addEventListener('click', () => toggleSidebar(false));
+  }
 
-  // Show Add New Task Modal event listener
-  // createNewTaskBtn was conflicting with the addNewBtn
-  elements.addNewTaskBtn.addEventListener('click', () => {
-    toggleModal(true);
-    elements.filterDiv.style.display = 'block'; // Also show the filter overlay
-  });
-  
- const newTaskModal = elements.newTask;
+  if (elements.showSideBarBtn) {
+    elements.showSideBarBtn.addEventListener('click', () => toggleSidebar(true));
+  }
 
-  // Add new task form submission event listener
-  elements.newTask.addEventListener('submit',  (event) => {
-    addTask(event)
-  });
+  if (elements.themeSwitch) {
+    elements.themeSwitch.addEventListener('click', (event) => toggleTheme(event));
+  }
+
+  if (elements.addNewTaskBtn) {
+    elements.addNewTaskBtn.addEventListener('click', () => {
+      toggleModal(true);
+      elements.filterDiv.style.display = 'block';
+    });
+  }
+
+  if (elements.editBoardBtn) {
+    elements.editBoardBtn.addEventListener('click', () => {
+      elements.editBoardDiv.style.display = (elements.editBoardDiv.style.display === 'flex') ? 'none' : 'flex';
+    });
+  }
+
+  if (elements.modalWindow) {
+    elements.modalWindow.addEventListener('submit', (event) => {
+      addTask(event);
+    });
+  }
+
+  if (elements.updateTask) {
+    elements.updateTask.addEventListener('click', () => {
+      toggleModal(true, elements.editModalWindow);
+      elements.filterDiv.style.display = 'block';
+    });
+  }
 }
+
 //updates the task form submission of existing tasks first attempt
 /*elements.updateTask.addEventListener('click', () => {
   toggleModal(true);
@@ -233,8 +251,8 @@ function setupEventListeners() {
 
 // Toggles tasks modal
 // Task: Fix bugs
-function toggleModal(show, modal = elements.newTask) {
-  modal.style.display = show ? 'block' : 'none'; 
+function toggleModal(display, modalWindow ) {
+  modalWindow.style.display = display ? 'flex' : 'none'; 
 }
 
 /*************************************************************************************************************************************************
@@ -245,14 +263,7 @@ function addTask(event) {
   event.preventDefault();
   
   // Assign user input to the task object
-  // trying to take {} out of an object
-  /*const task = { 
-    userInput : document.getElementById("modal-title-input"),// gets the task title
-    userDescription : document.getElementById("modal-desc-input"),// gets the task description
-    userStatus: document.getElementById("modal-select-status")//gets the status
-    // Add task properties here
-  };*/
-
+  
   const titleValue = document.getElementById("title-input").value;
   const descriptionValue = document.getElementById("desc-input").value;
   const statusValue = document.getElementById("select-status").value;
@@ -263,35 +274,23 @@ function addTask(event) {
     return;
   }
 
-const newTaskData = {
-title: titleValue,
-description: descriptionValue,
-state: statusValue,
-board: activeBoard // added to object to ensure the new task is added to the respective board
-};
+  const newTaskData = {
+    //id: Date.now(), // unique id
+    title: titleValue,
+    description: descriptionValue,
+    state: statusValue, // Ensure this matches your column's data attribute
+    board: activeBoard
+  };
 console.log(newTaskData);
 
-  const newTask = createNewTask(newTaskData);
-  if (newTask) {
-
-    const tasks = putTask();
-     //call the function! ill send the function to the refreshTasksUI()
-     tasks.push(newTask);
-     //sends the task to the local storage
-     localStorage.setItem('tasks', JSON.stringify(tasks));
-
-     
-    addTaskToUI(newTask);
-    toggleModal(false);
-    elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-    // const boardElement = document.createElement("button");
-    // boardElement.textContent = board;
-    // function displayBoards(boards) 
-    event.target.reset(); // Ensure this targets the correct form ,this was low key confusing
-    refreshTasksUI();
-  }else {
-    console.error('Failed to create a new task');
-  }
+const newTask = createNewTask(task);
+    if (newTask) {
+      addTaskToUI(newTask);
+      toggleModal(false);
+      elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
+      event.target.reset();
+      refreshTasksUI();
+    }
 }
 
 function toggleSidebar(show) {
@@ -311,7 +310,7 @@ function toggleSidebar(show) {
 
 function toggleTheme() {
   const body = document.body;
-  const logo = document.getElementById("logo"); // Ensure this ID matches your HTML
+  const logo = document.getElementById("logo"); // link logo to theme switch
 
   // Define the paths to your SVG files for light and dark themes
   const lightThemeLogo = './assets/logo-light.svg';
@@ -323,62 +322,53 @@ function toggleTheme() {
 
   // Save the theme preference
   localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+  // Set the theme on page load based on the saved preference
+
 }
-
-// Set the theme on page load based on the saved preference
-document.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark-theme');
-    document.getElementById('logo').src = './assets/logo-dark.svg';
-  } else {
-    document.body.classList.add('light-theme');
-    document.getElementById('logo').src = './assets/logo-light.svg';
-  }
-});
-
 // theme switch works well
 //i need to swop logo based on themes
 //WOOHOOO ITS WORKS IM SUCH A GENIUS!!!!!!
 //no actually its dumb!!!!
 //Also sorry for exclaiming in the commit , its past midnight ive been trying to figure it out for almost 14hours 
 
-
-
-
 function openEditTaskModal(task) {
- // get new user inputs
-  const editModalWindow = document.querySelector("#edit-task-form");
-  console.log(editModalWindow);
-  editModalWindow.style.display = "flex"; // Show the edit task modal
-
+  const editModalWindow = elements.editModalWindow;
 
   // Set task details in modal inputs
   document.getElementById("edit-task-title-input").value = task.title;
   document.getElementById("edit-task-desc-input").value = task.description;
-  document.getElementById("edit-select-status").value = task.state;
+  const selectedStatus = elements.editSelectStatus.querySelector(`option[value="${task.status}"]`);
+  selectedStatus.selected = true;
 
-  // Get button elements from the task modal
-  const saveButton = document.getElementById("save-task-changes-btn"); 
-  const deleteButton = document.getElementById("delete-task-btn");
+  toggleModal(true, editModalWindow);
 
-  // Call saveTaskChanges upon click of Save Changes button
-  saveButton.onclick = function() {
-    saveTaskChanges(task.id);
-    console.log(saveTaskChanges);
-    };
-
-  // Delete task using a helper function and close the task modal
-  deleteButton.onclick = function() {
-    deleteTask(task.id);
-    editModalWindow.style.display= "edit-task-modal-window" // Closes the modal window
-  };
-
-
-
-  toggleModal(true,editModalWindow);
+  addEventListenersToModalButtons(task.id, editModalWindow);
 }
 
+function addEventListenersToModalButtons(taskId, editModalWindow) {
+  const saveButton = document.getElementById("save-task-changes-btn");
+  const deleteButton = document.getElementById("delete-task-btn");
+
+  saveButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    try {
+      saveTaskChanges(taskId);
+    } catch (error) {
+      console.error("Error saving task changes:", error);
+    }
+  });
+
+  deleteButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    try {
+      deleteTask(taskId);
+      refreshTasksUI();
+      toggleModal(false, editModalWindow);
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  });
+}
 
 //remember to call the function saveTaskChanges, this is for updates aka patches
 function saveTaskChanges(taskId) {
@@ -398,9 +388,11 @@ function saveTaskChanges(taskId) {
   // Update task using a helper function
   patchTask(taskId, updatedTaskData)
   // Close the modal and refresh the UI to reflect the changes
-  toggleModal(false);
+  toggleModal(false, editModalWindow);
   refreshTasksUI();
 }
+
+
 
 /*************************************************************************************************************************************************/
 
