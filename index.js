@@ -34,7 +34,7 @@ const elements = {
   addNewTaskBtn: document.getElementById('add-new-task-btn'),
   editBoardBtn: document.getElementById('edit-board-btn'),
   addModalWindow: document.getElementById('new-task-modal-window'),
-  const cancelEditBtn = document.getElementById('cancel-edit-btn');
+  cancelEditBtn : document.getElementById('cancel-edit-btn'),
   // Filter overlay
   filterDiv: document.getElementById('filterDiv'),
   // Theme switch
@@ -185,65 +185,41 @@ function addTaskToUI(task) {
 
 
 function setupEventListeners() {
-  if (elements.cancelEditBtn) {
-    elements.cancelEditBtn.addEventListener('click', () => {
+  const cancelEditBtn = document.getElementById('cancel-edit-btn');
+  if (cancelEditBtn) {
+    cancelEditBtn.addEventListener('click', () => {
       toggleModal(false, elements.editTaskModal);
     });
   }
-
-  if (elements.cancelAddTaskBtn) {
-    elements.cancelAddTaskBtn.addEventListener('click', () => {
-      toggleModal(false);
-      elements.filterDiv.style.display = 'none';
-    });
-  }
-
-  (elements.filterDiv) {
-    elements.filterDiv.addEventListener('click', () => {
-      toggleModal(false);
-      elements.filterDiv.style.display = 'none';
-    });
-  }
-
-  if (elements.hideSideBarBtn) {
-    elements.hideSideBarBtn.addEventListener('click', () => toggleSidebar(false));
-  }
-
-  if (elements.showSideBarBtn) {
-    elements.showSideBarBtn.addEventListener('click', () => toggleSidebar(true));
-  }
-
-  if (elements.themeSwitch) {
-    elements.themeSwitch.addEventListener('click', (event) => toggleTheme(event));
-  }
-
-  if (elements.addNewTaskBtn) {
-    elements.addNewTaskBtn.addEventListener('click', () => {
-      toggleModal(true);
-      elements.filterDiv.style.display = 'block';
-    });
-  }
-
-  if (elements.editBoardBtn) {
-    elements.editBoardBtn.addEventListener('click', () => {
-      elements.editBoardDiv.style.display = (elements.editBoardDiv.style.display === 'flex') ? 'none' : 'flex';
-    });
-  }
-
-  if (elements.modalWindow) {
-    elements.modalWindow.addEventListener('submit', (event) => {
-      addTask(event);
-    });
-  }
-
-  if (elements.updateTask) {
-    elements.updateTask.addEventListener('click', () => {
-      toggleModal(true, elements.editModalWindow);
-      elements.filterDiv.style.display = 'block';
-    });
-  }
+  // Cancel adding new task event listener
+  const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
+  cancelAddTaskBtn.addEventListener('click', () => {
+    toggleModal(false);
+    elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
+  });
+  // Clicking outside the modal to close it
+  elements.filterDiv.addEventListener('click', () => {
+    toggleModal(false);
+    elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
+  });
+  // Show sidebar event listener
+  elements.hideSideBarBtn.addEventListener('click',() => toggleSidebar(false));
+  elements.showSideBarBtn.addEventListener('click',() => toggleSidebar(true));
+  // Theme switch event listener
+  elements.themeSwitch.addEventListener('change', toggleTheme);
+  // Show Add New Task Modal event listener
+  // createNewTaskBtn was conflicting with the addNewBtn
+  elements.addNewTaskBtn.addEventListener('click', () => {
+    toggleModal(true, elements.newTask);
+    elements.filterDiv.style.display = 'block'; // Also show the filter overlay
+  });
+  
+ const newTaskModal = elements.newTask;
+  // Add new task form submission event listener
+  elements.newTask.addEventListener('submit',  (event) => {
+    addTask(event)
+  });
 }
-
 //updates the task form submission of existing tasks first attempt
 /*elements.updateTask.addEventListener('click', () => {
   toggleModal(true);
@@ -252,8 +228,12 @@ function setupEventListeners() {
 
 // Toggles tasks modal
 // Task: Fix bugs
-function toggleModal(display, modalWindow ) {
-  modalWindow.style.display = display ? 'flex' : 'none'; 
+function toggleModal(show, modal ) {
+  if (show) {
+    modal.style.display = 'flex'; // Show the modal
+  } else {
+    modal.style.display = 'none'; // Hide the modal
+  }
 }
 
 /*************************************************************************************************************************************************
@@ -262,12 +242,21 @@ function toggleModal(display, modalWindow ) {
 
 function addTask(event) {
   event.preventDefault();
-  
+  toggleModal(true, addModalWindow)
+    // Assign user input to the task object
+  // trying to take {} out of an object
+  /*const task = { 
+    userInput : document.getElementById("modal-title-input"),// gets the task title
+    userDescription : document.getElementById("modal-desc-input"),// gets the task description
+    userStatus: document.getElementById("modal-select-status")//gets the status
+    // Add task properties here
+  };*/
   // Assign user input to the task object
   
   const titleValue = document.getElementById("title-input").value;
   const descriptionValue = document.getElementById("desc-input").value;
   const statusValue = document.getElementById("select-status").value;
+  console.log(statusValue)
  
   // Because of error index.js:145 Column not found for status: undefined i need to check if statusValue appears
   if (!statusValue) {
